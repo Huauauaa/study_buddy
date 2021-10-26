@@ -17,3 +17,11 @@
 ### install labs
 
 `pip install -r requirements.txt`
+
+## create project
+
+`django-admin startproject study_buddy`
+
+## run project
+
+`python manage.py runserver`
