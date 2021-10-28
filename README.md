@@ -4,11 +4,12 @@
 
 ### create virtual env
 
-`virturalenv env`
+`virturalenv [envname]`
 
 ### active virtual env
 
-`env\Scripts\activate`
+- win: `[envname]\Scripts\activate`
+- mac: `source [envname]/bin/activate`
 
 ### freeze labs
 
