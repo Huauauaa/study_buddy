@@ -1,10 +1,14 @@
 # study_buddy
 
-## prepare
+## create project
+
+`django-admin startproject study_buddy`
+
+## virtualenv
 
 ### create virtual env
 
-`virturalenv [envname]`
+`virturalenv -p python3 [envname]`
 
 ### active virtual env
 
@@ -19,10 +23,17 @@
 
 `pip install -r requirements.txt`
 
-## create project
-
-`django-admin startproject study_buddy`
-
 ## run project
 
 `python manage.py runserver`
+
+## templates
+
+### include
+
+`{% include 'navbar.html' %}`
+
+### extends
+
+- parent.html: `{% block content %} {% endblock %}`
+- children: `{% extends 'parent.html' %} {% block content %} ... {% endblock %}`
