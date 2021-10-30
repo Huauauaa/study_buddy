@@ -1,23 +1,39 @@
 {% extends 'main.html' %} {% block content %}
 
-<a href="{% url 'create_room' %}">Create Room</a>
-<div>
-  {% for room in rooms %}
+<a href="{% url 'create_room' %}" class="btn btn-primary">Create Room</a>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Handler</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for room in rooms %}
 
-  <div
-    style="
-      display: grid;
-      grid-template-columns: repeat(4, 100px);
-      margin: 1rem 0;
-    "
-  >
-    <div>{{room.id}}</div>
-    <div><a href="{% url 'room' room.id %}">{{room.name}}</a></div>
-    <div><a href="{% url 'update_room' room.id%}">Edit</a></div>
-    <div><a href="{% url 'delete_room' room.id%}">Delete</a></div>
-  </div>
+    <tr>
+      <th scope="row">{{room.id}}</th>
+      <td>
+        <a href="{% url 'room' room.id %}" class="btn btn-link">
+          {{room.name}}
+        </a>
+      </td>
+      <td>
+        <a
+          href="{% url 'update_room' room.id%}"
+          class="btn btn-outline-primary"
+        >
+          Edit
+        </a>
+        <a href="{% url 'delete_room' room.id%}" class="btn btn-outline-danger">
+          Delete
+        </a>
+      </td>
+    </tr>
 
-  {% endfor %}
-</div>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}

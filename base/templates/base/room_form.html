@@ -3,7 +3,7 @@
 <form method="post" action="">
   {% csrf_token %} {{form.as_p}}
 
-  <button type="submit">Submit</button>
-  <a href="{% url 'home' %}">Cancel</a>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
 </form>
 {% endblock content %}

@@ -3,10 +3,12 @@
 <form action="" method="post">
   {% csrf_token %}
 
-  <div>Are you sure to delete {{item}}?</div>
+  <div class="alert alert-danger" role="alert">
+    Are you sure to delete <span class="badge bg-secondary">{{item}}</span> ?
+  </div>
 
-  <button type="submit">Confirm</button>
-  <a href="{% url 'home' %}">Cancel</a>
+  <button type="submit" class="btn btn-primary">Confirm</button>
+  <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
 </form>
 
 {% endblock content %}
