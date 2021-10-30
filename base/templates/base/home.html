@@ -1,18 +1,22 @@
 {% extends 'main.html' %} {% block content %}
 
-<h1>Home Template</h1>
-
+<a href="{% url 'create_room' %}">Create Room</a>
 <div>
   {% for room in rooms %}
 
-  <div>
-    <h5>
-      {{room.id}}:{% comment %}
-      <a href="/room/{{room.id}}">{{room.name}}</a>
-      {% endcomment %}
-      <a href="{% url 'room' room.id %}">{{room.name}}</a>
-    </h5>
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      margin: 1rem 0;
+    "
+  >
+    <div>{{room.id}}</div>
+    <div><a href="{% url 'room' room.id %}">{{room.name}}</a></div>
+    <div><a href="{% url 'update_room' room.id%}">Edit</a></div>
+    <div><a href="{% url 'delete_room' room.id%}">Delete</a></div>
   </div>
+
   {% endfor %}
 </div>
 
