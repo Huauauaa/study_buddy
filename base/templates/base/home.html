@@ -17,7 +17,9 @@
     </ul>
   </div>
   <div class="col-10">
+    {% if user.is_authenticated %}
     <a href="{% url 'create_room' %}" class="btn btn-primary">Create Room</a>
+    {% endif %}
     <div class="alert alert-info" role="alert">
       {{room_count}} room(s) is avilable.
     </div>
@@ -42,6 +44,7 @@
           </td>
           <td>{{room.topic.name}}</td>
           <td>
+            {% if user.is_authenticated %}
             <a
               href="{% url 'update_room' room.id%}"
               class="btn btn-outline-primary btn-sm"
@@ -54,6 +57,7 @@
             >
               <i class="bi-x-lg" role="img" aria-label="delete"></i>
             </a>
+            {% endif %}
           </td>
         </tr>
 

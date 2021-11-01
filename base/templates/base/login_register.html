@@ -1,0 +1,44 @@
+{% extends 'base.html' %} {% block main %} {% if page == 'login' %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="md-3 row">
+          <label for="username" class="form-label">username</label>
+          <input
+            id="username"
+            name="username"
+            placeholder="Input username"
+            class="form-control"
+          />
+        </div>
+        <div class="md-3 row">
+          <label for="password" class="form-label">password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Input password"
+            class="form-control"
+          />
+        </div>
+        <div class="md-3 row">
+          <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+        <p>Haven't a account yet?</p>
+        <a href="{% url 'register' %}">Register</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<form action="" method="POST">
+  {% csrf_token %} {{form.as_p}}
+  <button type="submit">Register</button>
+  <p>Alreay has an account?</p>
+  <a href="{% url 'login' %}">Login</a>
+</form>
+
+{% endif %} {% endblock %}

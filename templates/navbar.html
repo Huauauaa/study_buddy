@@ -15,6 +15,14 @@
           />
         </form>
       </div>
+      <div class="col-4"></div>
+      <div class="col-2">
+        {% if user.is_authenticated %} Hello, {{user.username}}
+        <a href="{% url 'logout'%}">Logout</a>
+        {% else %}
+        <a href="{% url 'login'%}" class="nav-link">Login</a>
+        {% endif %}
+      </div>
     </div>
 
     <hr />
