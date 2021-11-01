@@ -1,4 +1,25 @@
 {% extends 'main.html' %} {% block content %}
 <h2>{{room.name}}</h2>
 <h3>Host: {{room.host.username}}</h3>
+<hr />
+{% for message in room_messages %}
+<div>
+  <p>
+    @{{message.user}} {{message.created|timesince}} ago
+    <span>
+      {% if request.user == message.user %}
+      <a href="{% url 'delete_message' message.id%}">Delete</a>
+      {% endif %}
+    </span>
+  </p>
+  <p>{{message.body}}</p>
+  <hr />
+</div>
+{% endfor %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="text" name="body" placeholder="Input your message here" />
+</form>
+
 {% endblock %}

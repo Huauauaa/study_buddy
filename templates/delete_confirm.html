@@ -8,7 +8,9 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Confirm</button>
-  <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+  <a href="{{request.META.HTTP_REFERER }}" class="btn btn-secondary">
+    Cancel
+  </a>
 </form>
 
 {% endblock content %}

@@ -3,13 +3,27 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from base.forms.RoomForm import RoomForm
+from base.models.Message import Message
 from base.models.Room import Room
 
 
 @login_required(login_url='login')
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    return render(request, 'base/room.html', {'room': room})
+    room_messages = room.message_set.all().order_by('-created')
+
+    if request.method == 'POST':
+        message = Message(
+            user=request.user, room=room, body=request.POST.get('body')
+        )
+        message.save()
+        return redirect('room', pk)
+
+    return render(
+        request,
+        'base/room.html',
+        {'room': room, 'room_messages': room_messages},
+    )
 
 
 @login_required(login_url='login')
