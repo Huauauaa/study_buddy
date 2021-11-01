@@ -1,25 +1,43 @@
 {% extends 'main.html' %} {% block content %}
+<style>
+  .home-main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+  }
+</style>
 <h2>{{room.name}}</h2>
 <h3>Host: {{room.host.username}}</h3>
 <hr />
-{% for message in room_messages %}
-<div>
-  <p>
-    @{{message.user}} {{message.created|timesince}} ago
-    <span>
-      {% if request.user == message.user %}
-      <a href="{% url 'delete_message' message.id%}">Delete</a>
-      {% endif %}
-    </span>
-  </p>
-  <p>{{message.body}}</p>
-  <hr />
-</div>
-{% endfor %}
+<div class="home-main">
+  <div>
+    {% for message in room_messages %}
+    <div id="message-{{message.id}}">
+      <p>
+        @{{message.user}} {{message.created|timesince}} ago
+        <span>
+          {% if request.user == message.user %}
+          <a href="{% url 'delete_message' message.id%}">Delete</a>
+          <a href="{% url 'update_message' message.id%}">Edit</a>
+          {% endif %}
+        </span>
+      </p>
+      <p>{{message.body}}</p>
+      <hr />
+    </div>
+    {% endfor %}
 
-<form action="" method="POST">
-  {% csrf_token %}
-  <input type="text" name="body" placeholder="Input your message here" />
-</form>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input type="text" name="body" placeholder="Input your message here" />
+    </form>
+  </div>
+  <div>
+    <p>Participants</p>
+    {% for participant in participants %}
+    <div>@{{participant.username}}</div>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}

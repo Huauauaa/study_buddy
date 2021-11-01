@@ -8,12 +8,12 @@
 
 ### create virtual env
 
-`virturalenv -p python3 [envname]`
+`virturalenv -p python3 [env_alias]`
 
 ### active virtual env
 
-- win: `[envname]\Scripts\activate`
-- mac: `source [envname]/bin/activate`
+- win: `[env_alias]\Scripts\activate`
+- mac: `source [env_alias]/bin/activate`
 
 ### freeze labs
 
@@ -35,5 +35,10 @@
 
 ### extends
 
-- parent.html: `{% block content %} {% endblock %}`
-- children: `{% extends 'parent.html' %} {% block content %} ... {% endblock %}`
+- parent.html: `{% block [block_alias] %} {% endblock %}`
+- children: `{% extends 'parent.html' %} {% block [block_alias] %} ... {% endblock %}`
+
+## 返回上一步
+
+- `<a href="{{request.META.HTTP_REFERER }}" >Back</a>`
+- `return redirect(request.META.HTTP_REFERER)`

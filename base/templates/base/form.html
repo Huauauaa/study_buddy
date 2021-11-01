@@ -4,6 +4,6 @@
   {% csrf_token %} {{form.as_p}}
 
   <button type="submit" class="btn btn-primary">Submit</button>
-  <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+  <a href="{{request.META.HTTP_REFERER }}" class="btn btn-secondary">Cancel</a>
 </form>
 {% endblock content %}

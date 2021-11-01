@@ -3,6 +3,7 @@ from django.db.models import Q
 
 from base.models.Room import Room
 from base.models.Topic import Topic
+from base.models.Message import Message
 
 
 def home(request):
@@ -15,9 +16,16 @@ def home(request):
             Q(topic__name__icontains=q) | Q(name__icontains=q)
         )
     topics = Topic.objects.all()
+    room_messages = Message.objects.filter(room__in=rooms).order_by('-created')
 
     return render(
         request,
         'base/home.html',
-        {'rooms': rooms, 'topics': topics, 'room_count': rooms.count(), 'q': q},
+        {
+            'rooms': rooms,
+            'topics': topics,
+            'room_count': rooms.count(),
+            'q': q,
+            'room_messages': room_messages,
+        },
     )
