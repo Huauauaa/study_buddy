@@ -1,3 +1,5 @@
+{% load static %}
+
 <header>
   <div class="container">
     <div class="row align-items-center">
@@ -18,6 +20,7 @@
       <div class="col-4"></div>
       <div class="col-2">
         {% if user.is_authenticated %} Hello, {{user.username}}
+        <img src="{% static 'images/avatar.jpg'%}" alt="avatar" width="30" />
         <a href="{% url 'logout'%}">Logout</a>
         {% else %}
         <a href="{% url 'login'%}" class="nav-link">Login</a>
