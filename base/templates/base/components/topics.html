@@ -1,11 +1,11 @@
 <ul class="nav flex-column">
   <li class="nav-item">
-    <a href="{% url 'home' %}" class="nav-link">ALL</a>
+    <a href="{{request.path}}" class="nav-link">ALL</a>
   </li>
   {% for topic in topics%}
 
   <li class="nav-item">
-    <a href="{% url 'home' %}?topic_name={{topic.name}}" class="nav-link">
+    <a href="{{request.path}}?topic_name={{topic.name}}" class="nav-link">
       {{topic.name}}
     </a>
   </li>

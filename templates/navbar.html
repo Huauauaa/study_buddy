@@ -7,7 +7,7 @@
         <h1><a href="/" class="navbar-brand">StudyBuddy</a></h1>
       </div>
       <div class="col-4">
-        <form action="{%url 'home'  %}" method="GET">
+        <form action="{{request.path}}" method="GET">
           <input
             type="text"
             name="q"
@@ -19,7 +19,8 @@
       </div>
       <div class="col-4"></div>
       <div class="col-2">
-        {% if user.is_authenticated %} Hello, {{user.username}}
+        {% if user.is_authenticated %} Hello,
+        <a href="{% url 'user_profile' user.id%}">{{user.username}}</a>
         <img src="{% static 'images/avatar.jpg'%}" alt="avatar" width="30" />
         <a href="{% url 'logout'%}">Logout</a>
         {% else %}

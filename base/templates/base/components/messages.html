@@ -1,8 +1,11 @@
-<p>Recent Activities</p>
+<p>Recent messages</p>
 
 {% for message in room_messages %}
 <div>
-  <p>@{{message.user}} {{message.created|timesince}} ago</p>
+  <p>
+    <a href="{% url 'user_profile' message.user.id%}">@{{message.user}}</a>
+    {{message.created|timesince}} ago
+  </p>
   <a href="{% url 'room' message.room.id %}#message-{{message.id}}">
     {{message.body}}
   </a>

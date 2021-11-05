@@ -1,0 +1,17 @@
+{% extends 'main.html' %} {% block content %} {{user}}
+
+<style>
+  .profile-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 1rem;
+  }
+</style>
+
+<div class="profile-wrapper">
+  <div>{% include 'base/components/topics.html' %}</div>
+  <div>{% include 'base/components/rooms.html' %}</div>
+  <div>{% include 'base/components/messages.html' %}</div>
+</div>
+
+{% endblock content %}
