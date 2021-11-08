@@ -8,7 +8,7 @@
 
 ### create virtual env
 
-`virturalenv -p python3 [env_alias]`
+`virtualenv -p python3 [env_alias]`
 
 ### active virtual env
 
