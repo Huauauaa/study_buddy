@@ -5,11 +5,14 @@ from django.contrib.auth.decorators import login_required
 from base.forms.RoomForm import RoomForm
 from base.models.Message import Message
 from base.models.Room import Room
+from base.models.Topic import Topic
 
 
 @login_required(login_url='login')
 def room(request, pk):
+    print(pk)
     room = Room.objects.get(id=pk)
+    print(pk, type(pk), room)
     room_messages = room.message_set.all().order_by('-created')
     participants = room.participants.all()
 
@@ -33,6 +36,7 @@ def room(request, pk):
 
 @login_required(login_url='login')
 def create_room(request):
+    topics = Topic.objects.all()
     form = RoomForm()
     if request.method == 'POST':
         form = RoomForm(request.POST)
@@ -41,19 +45,30 @@ def create_room(request):
             room.host = request.user
             room.save()
             return redirect('home')
-    return render(request, 'base/form.html', {'form': form})
+    return render(
+        request, 'base/room-form.html', {'form': form, 'topics': topics}
+    )
 
 
 @login_required(login_url='login')
 def update_room(request, id):
+    topics = Topic.objects.all()
     room = Room.objects.get(id=id)
-    form = RoomForm(instance=room)
     if request.method == 'POST':
-        form = RoomForm(request.POST, instance=room)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    return render(request, 'base/form.html', {'form': form})
+        topic_name = request.POST.get('topic')
+        print(topic_name)
+        (topic, is_exist) = Topic.objects.get_or_create(name=topic_name)
+        print(topic, is_exist)
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
+        return redirect('home')
+    return render(
+        request,
+        'base/room-form.html',
+        {'room': room, 'topics': topics},
+    )
 
 
 @login_required(login_url='login')

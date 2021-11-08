@@ -42,3 +42,7 @@
 
 - `<a href="{{request.META.HTTP_REFERER }}" >Back</a>`
 - `return redirect(request.META.HTTP_REFERER)`
+
+## 列表的长度
+
+`{{ some_list|length }}`

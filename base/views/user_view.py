@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 
 from base.models.Topic import Topic
+from base.models.Room import Room
 from django.db.models import Q
 
 
@@ -25,6 +26,7 @@ def user_profile(request, id):
         {
             'user': user,
             'topics': topics,
+            'all_rooms': Room.objects.all(),
             'rooms': rooms,
             'room_messages': room_messages,
             'q': q,

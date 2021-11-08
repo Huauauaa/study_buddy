@@ -9,10 +9,11 @@ from base.models.Message import Message
 def home(request):
     q = request.GET.get('q') or ''
     topic_name = request.GET.get('topic_name') or ''
+    all_rooms = Room.objects.all()
     if topic_name:
-        rooms = Room.objects.filter(topic__name=topic_name)
+        rooms = all_rooms.filter(topic__name=topic_name)
     else:
-        rooms = Room.objects.filter(
+        rooms = all_rooms.filter(
             Q(topic__name__icontains=q) | Q(name__icontains=q)
         )
     topics = Topic.objects.all()
@@ -27,5 +28,7 @@ def home(request):
             'room_count': rooms.count(),
             'q': q,
             'room_messages': room_messages,
+            'topic_name': topic_name,
+            'all_rooms': all_rooms,
         },
     )
