@@ -10,12 +10,11 @@ from base.models.Topic import Topic
 
 @login_required(login_url='login')
 def room(request, pk):
-    print(pk)
     room = Room.objects.get(id=pk)
-    print(pk, type(pk), room)
     room_messages = room.message_set.all().order_by('-created')
     participants = room.participants.all()
 
+    # create message
     if request.method == 'POST':
         Message.objects.create(
             user=request.user, room=room, body=request.POST.get('body')
@@ -39,15 +38,15 @@ def create_room(request):
     topics = Topic.objects.all()
     form = RoomForm()
     if request.method == 'POST':
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            room = form.save(commit=False)
-            room.host = request.user
-            room.save()
-            return redirect('home')
-    return render(
-        request, 'base/room-form.html', {'form': form, 'topics': topics}
-    )
+        topic_name = request.POST.get('topic')
+        (topic, is_new) = Topic.objects.get_or_create(name=topic_name)
+        room = Room.objects.create(name=request.POST.get('name'))
+        room.host = request.user
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
+        return redirect('home')
+    return render(request, 'base/room-form.html', {'form': form, 'topics': topics})
 
 
 @login_required(login_url='login')
@@ -56,9 +55,7 @@ def update_room(request, id):
     room = Room.objects.get(id=id)
     if request.method == 'POST':
         topic_name = request.POST.get('topic')
-        print(topic_name)
         (topic, is_exist) = Topic.objects.get_or_create(name=topic_name)
-        print(topic, is_exist)
         room.name = request.POST.get('name')
         room.topic = topic
         room.description = request.POST.get('description')

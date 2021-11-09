@@ -12,8 +12,8 @@
 
 ### active virtual env
 
-- win: `[env_alias]\Scripts\activate`
-- mac: `source [env_alias]/bin/activate`
+- win: `[envname]\Scripts\activate` or `source ./[envname]/Scripts/activate`
+- mac: `source [envname]/bin/activate`
 
 ### freeze labs
 
