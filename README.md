@@ -46,3 +46,7 @@
 ## 列表的长度
 
 `{{ some_list|length }}`
+
+## 跳转页面带参数
+
+`redirect('{}?flag=True'.format(reverse('new_view'))`
