@@ -1,11 +1,12 @@
 from django.urls import path
 
-from base.views.message_view import delete_message, update_message
+from base.views.message_view import delete_message, update_message, activities
 from .views.home_view import home
 from .views.room_view import room, create_room, update_room, delete_room
 from .views.auth_view import login_view, logout_view, register_view
 from .views.user_view import user_profile
 from .views.settings_view import settings_view
+from .views.topic_view import topics_view
 
 urlpatterns = [
     path('', home, name='home'),
@@ -20,4 +21,6 @@ urlpatterns = [
     path('delete_message/<int:id>/', delete_message, name='delete_message'),
     path('update_message/<int:id>/', update_message, name='update_message'),
     path('settings/<int:id>/', settings_view, name='settings'),
+    path('topics/', topics_view, name='topics'),
+    path('activities/', activities, name='activities'),
 ]

@@ -27,3 +27,10 @@ def update_message(request, id):
             form.save()
             return redirect(request.META.HTTP_REFERER)
     return render(request, 'base/form.html', {'form': form})
+
+
+def activities(request):
+    room_messages = Message.objects.all().order_by('-created')
+    return render(
+        request, 'base/activities.html', {'room_messages': room_messages}
+    )

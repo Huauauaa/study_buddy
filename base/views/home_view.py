@@ -25,7 +25,6 @@ def home(request):
         {
             'rooms': rooms,
             'topics': topics,
-            'room_count': rooms.count(),
             'q': q,
             'room_messages': room_messages,
             'topic_name': topic_name,
