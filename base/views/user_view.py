@@ -4,6 +4,8 @@ from base.models.Topic import Topic
 from base.models.Room import Room
 from base.models.User import User
 from django.db.models import Q
+from base.forms.UserForm import UserForm
+from django.shortcuts import redirect
 
 
 def user_profile(request, id):
@@ -31,4 +33,24 @@ def user_profile(request, id):
             'room_messages': room_messages,
             'q': q,
         },
+    )
+
+
+def update_user(request, id):
+    if id:
+        user = User.objects.get(id=id)
+    else:
+        user = request.user
+
+    form = UserForm(instance=user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES, instance=user)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('user_profile', id=user.id)
+
+    return render(
+        request, 'base/update_user_profile.html', {'user': user, 'form': form}
     )

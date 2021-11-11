@@ -1,8 +1,9 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from base.models.User import User
+from base.forms.UserCreateForm import UserCreateForm
+from django.contrib.auth.hashers import make_password
 
 
 def login_view(request):
@@ -10,18 +11,19 @@ def login_view(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        email = request.POST.get('email')
         password = request.POST.get('password')
         try:
-            user = User.objects.get(username=username)
-            user = authenticate(request, username=username, password=password)
+            user = User.objects.get(email=email)
+
+            user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
                 return redirect(request.GET.get('next') or 'home')
             else:
-                messages.error(request, 'username or password is wrong.')
+                messages.error(request, 'email or password is wrong.')
         except:
-            messages.error(request, 'username or password is wrong.')
+            messages.error(request, 'email or password is wrong.')
     return render(request, 'base/login_register.html', {'page': 'login'})
 
 
@@ -31,13 +33,13 @@ def logout_view(request):
 
 
 def register_view(request):
-    form = UserCreationForm()
+    form = UserCreateForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreateForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.username = user.username.lower()
+            user.password = make_password(request.POST.get('password1'))
             user.save()
             login(request, user)
             return redirect('home')

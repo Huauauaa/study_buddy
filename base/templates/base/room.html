@@ -97,9 +97,7 @@
               class="room__author"
             >
               <div class="avatar avatar--small">
-                <img
-                  src="https://randomuser.me/api/portraits/women/{{room.host.id}}.jpg"
-                />
+                <img src="{{room.host.avatar.url}}" />
               </div>
               <span>@{{room.host}}</span>
             </a>
@@ -118,9 +116,7 @@
                     class="thread__authorInfo"
                   >
                     <div class="avatar avatar--small">
-                      <img
-                        src="https://randomuser.me/api/portraits/women/{{message.user.id}}.jpg"
-                      />
+                      <img src="{{message.user.avatar.url}}" />
                     </div>
                     <span>@{{message.user}}</span>
                   </a>
@@ -168,9 +164,7 @@
         {% for participant in participants %}
         <a href="profile.html" class="participant">
           <div class="avatar avatar--medium">
-            <img
-              src="https://randomuser.me/api/portraits/women/{{participant.id}}.jpg"
-            />
+            <img src="{{participant.avatar.url}}" />
           </div>
           <p>
             {{participant.username}}

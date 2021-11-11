@@ -13,12 +13,12 @@
         <form class="form" action="" method="POST">
           {% csrf_token %}
           <div class="form__group form__group">
-            <label for="username">Username</label>
+            <label for="email">Email</label>
             <input
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               type="text"
-              placeholder="e.g. dennis_ivy"
+              placeholder="e.g. john@gmail.com"
             />
           </div>
           <div class="form__group">
@@ -74,44 +74,12 @@
         <h2 class="auth__tagline">Find your study partner</h2>
 
         <form class="form" action="" method="POST">
-          <div class="form__group form__group">
-            <label for="fullname">Full Name</label>
-            <input
-              id="fullname"
-              name="fullname"
-              type="text"
-              placeholder="e.g. Dennis Ivy"
-            />
-          </div>
-          <div class="form__group form__group">
-            <label for="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="e.g. dennis_ivy"
-            />
-          </div>
+          {% csrf_token %} {% for field in form %}
           <div class="form__group">
-            <label for="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-            />
+            <label for="profile_pic">{{field.label}}</label>
+            {{field}}
           </div>
-
-          <div class="form__group">
-            <label for="confirm_password">Confirm Password</label>
-            <input
-              id="confirm_password"
-              name="confirm_password"
-              type="password"
-              placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
-            />
-          </div>
-
+          {% endfor %}
           <button class="btn btn--main" type="submit">
             <svg
               version="1.1"
