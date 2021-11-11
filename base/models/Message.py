@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 from base.models.Room import Room
+from base.models.User import User
 
 
 class Message(models.Model):

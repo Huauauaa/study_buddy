@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from base.models.Topic import Topic
+from base.models.User import User
 
 
 class Room(models.Model):

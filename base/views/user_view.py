@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 
 from base.models.Topic import Topic
 from base.models.Room import Room
+from base.models.User import User
 from django.db.models import Q
 
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from base.models.User import User
 
 
 def settings_view(request, id):
